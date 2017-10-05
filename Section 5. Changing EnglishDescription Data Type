@@ -1,0 +1,5 @@
+USE [LabDW]
+GO
+
+ALTER TABLE [dbo].[DimProduct] ALTER COLUMN [EnglishDescription] [nvarchar](400) NULL;
+GO
