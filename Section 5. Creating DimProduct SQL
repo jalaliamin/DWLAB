@@ -1,0 +1,28 @@
+USE [LabDW]
+GO
+
+CREATE TABLE [dbo].[DimProduct](
+	[ProductKey] [int] IDENTITY(1,1) NOT NULL,
+	[ProductAlternateKey] [nvarchar](25) NULL,
+	[WeightUnitMeasureCode] [nchar](2) NULL,
+	[SizeUnitMeasureCode] [nchar](2) NULL,
+	[EnglishProductName] [nvarchar](50) NOT NULL,
+	[StandardCost] [money] NULL,
+	[Color] [nvarchar](15) NOT NULL,
+	[SafetyStockLevel] [smallint] NULL,
+	[ReorderPoint] [smallint] NULL,
+	[ListPrice] [money] NULL,
+	[Size] [nvarchar](50) NULL,
+	[SizeRange] [nvarchar](50) NULL,
+	[Weight] [float] NULL,
+	[DaysToManufacture] [int] NULL,
+	[DealerPrice] [money] NULL,
+	[ModelName] [nvarchar](50) NULL,
+	[EnglishDescription] [nvarchar](300) NULL,
+	CONSTRAINT [PK_DimProduct_ProductKey] PRIMARY KEY CLUSTERED 
+	(
+		[ProductKey] ASC
+	)
+)
+
+GO
