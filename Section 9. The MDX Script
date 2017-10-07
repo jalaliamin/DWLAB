@@ -1,0 +1,21 @@
+WITH
+MEMBER [Measures].[PreviousYear] AS
+(
+PARALLELPERIOD(
+[Dim Date].[Hierarchy Fiscal Year Semester Quarter].[Fiscal Year],
+1,
+[Dim Date].[Hierarchy Fiscal Year Semester Quarter].CURRENTMEMBER
+)
+,[Measures].[Units Balance]
+)
+MEMBER [Measures].[Growth] AS
+IIF([Measures].[PreviousYear]=0, "0",
+(
+([Measures].[Units Balance] - [Measures].[PreviousYear]) /
+[Measures].[PreviousYear]
+)), FORMAT="Percent"
+SELECT
+[Dim Date].[Hierarchy Fiscal Year Semester Quarter].[Fiscal Year] On 0,
+[Dim Product].[Days To Manufacture].CHILDREN on 1
+FROM [Lab DW]
+Where [Measures].[Growth]
