@@ -1,0 +1,10 @@
+USE [LabStaging]
+GO
+DROP USER [NT AUTHORITY\Authenticated Users] 
+Go
+CREATE USER [NT AUTHORITY\Authenticated Users] 
+FOR LOGIN [NT AUTHORITY\Authenticated Users]
+WITH DEFAULT_SCHEMA = db_owner
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [NT AUTHORITY\Authenticated Users]
+Go
