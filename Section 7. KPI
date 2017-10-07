@@ -1,0 +1,9 @@
+CASE
+WHEN [Measures].[Units In] - [Measures].[Units Out] > 10
+THEN 1
+WHEN [Measures].[Units In] - [Measures].[Units Out] <= 10
+AND
+[Measures].[Units In] - [Measures].[Units Out] >= 0
+THEN 0
+ELSE -1
+END
