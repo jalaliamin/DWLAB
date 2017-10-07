@@ -1,0 +1,47 @@
+Case
+// Test for current coordinate being on (All) member.
+When [Dim Date].[Hierarchy Fiscal Year Semester Quarter].CurrentMember.Level Is
+     [Dim Date].[Hierarchy Fiscal Year Semester Quarter].[(All)]
+
+Then "NA"
+
+// Test to avoid division by zero.
+When IsEmpty
+     (
+       ( 
+         ParallelPeriod
+         (
+            [Dim Date].[Hierarchy Fiscal Year Semester Quarter].[Fiscal Year],
+            1,
+		    [Dim Date].[Hierarchy Fiscal Year Semester Quarter].CurrentMember
+         ),
+        [Measures].[Units Balance]
+        )
+     ) 
+Then Null
+
+Else ( 
+       ( [Dim Date].[Hierarchy Fiscal Year Semester Quarter].CurrentMember,
+	     [Measures].[Units Balance] ) 
+	   -
+       ( 
+         ParallelPeriod
+         (
+            [Dim Date].[Hierarchy Fiscal Year Semester Quarter].[Fiscal Year],
+            1,
+	        [Dim Date].[Hierarchy Fiscal Year Semester Quarter].CurrentMember
+         ),
+         [Measures].[Units Balance]
+       ) 
+	 )
+	 /
+     ( 
+       ParallelPeriod
+       (
+          [Dim Date].[Hierarchy Fiscal Year Semester Quarter].[Fiscal Year],
+          1,
+	      [Dim Date].[Hierarchy Fiscal Year Semester Quarter].CurrentMember
+       ),
+       [Measures].[Units Balance]
+     )
+End// This expression evaluates the difference between the value of the numeric
